@@ -1,0 +1,24 @@
+{% extends 'listing/base.html' %}
+
+{% block content %}
+
+<h2>{{ listing.title }}</h2>
+
+<p> Description : {{ listing.description }}</p>
+
+<p> Biographie : {{ band.biography }}</p>
+<p> Année : {{ listing.year }}</p>
+<p> Type : {{ listing.get_type_display }}</p>
+{% if listing.band %}
+<p> Groupe : <a href="{% url 'band-detail' listing.band.id %}">{{ listing.band.name }} </a> </p>
+{% else %}
+<p>Aucun groupe associé</p>
+{% endif %}
+
+{% if listing.sold %}
+<p>Disponible</p>
+{% else %}
+<p>Vendu</p>
+{% endif %}
+
+{% endblock %}

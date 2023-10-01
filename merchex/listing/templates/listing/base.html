@@ -1,0 +1,14 @@
+{% load static %}
+<html>
+    <head><title>Merchex</title></head>
+    <link rel="stylesheet" href="{% static 'listing/style.css' %}" />
+    <body>
+    
+        <nav>
+            <a href="{% url 'band-list' %}">Groupes</a>
+            <a href="{% url 'listing-list' %}">Listing</a>
+        </nav>
+        {% block content %}{% endblock %}
+
+    </body>
+</html>
