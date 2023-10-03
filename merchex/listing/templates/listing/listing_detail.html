@@ -6,7 +6,6 @@
 
 <p> Description : {{ listing.description }}</p>
 
-<p> Biographie : {{ band.biography }}</p>
 <p> Année : {{ listing.year }}</p>
 <p> Type : {{ listing.get_type_display }}</p>
 {% if listing.band %}
@@ -16,9 +15,9 @@
 {% endif %}
 
 {% if listing.sold %}
-<p>Disponible</p>
-{% else %}
 <p>Vendu</p>
+{% else %}
+<p>Disponible</p>
 {% endif %}
 
 {% endblock %}
