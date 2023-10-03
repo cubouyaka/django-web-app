@@ -1,6 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+
 from listing.models import Listing, Band
+from listing.forms import ContactUsForm
 
 def band_list(request):
     return render(request,'listing/band_list.html', {'bands' : Band.objects.all()})
@@ -13,7 +16,23 @@ def about(request):
     return render(request, 'listing/about.html')
 
 def contactus(request):
-    return render(request, 'listing/contact.html')
+    if request.method == 'POST':
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            send_mail(
+            subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via MerchEx Contact Us form',
+            message=form.cleaned_data['message'],
+            from_email=form.cleaned_data['email'],
+            recipient_list=['admin@merchex.xyz'],
+        )
+            return redirect('email-sent', email = form.cleaned_data['email'])
+    else:
+        form = ContactUsForm()
+
+    return render(request, 'listing/contact.html', {'form' : form})
+
+def email_sent(request, email):
+    return render(request, 'listing/email_sent.html', {'email' : email})
 
 def listing(request):
     return render(request, 'listing/listing.html',{'listings' : Listing.objects.all()})
