@@ -7,7 +7,6 @@
 <p> Genre : {{ band.get_genre_display }}</p>
 <p> Biographie : {{ band.biography }}</p>
 <p> Année de formation : {{ band.year_formed }}</p>
-<p> Genre : {{ band.genre }}</p>
 <p> Site officiel : {{ band.official_homepage }}</p>
 
 {% if band.official_homepage %}
@@ -19,5 +18,7 @@
 {% else %}
 <p>Le groupe n'est plus actif</p>
 {% endif %}
+
+<a href="{% url 'band-update' band.id %}">[modifier]</a>
 
 {% endblock %}
