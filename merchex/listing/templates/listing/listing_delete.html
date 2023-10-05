@@ -1,0 +1,14 @@
+{% extends 'listing/base.html' %}
+
+{% block content %}
+
+<h1>Suppresion du Listing {{ listing.title }}</h1>
+
+<p>Etes vous sur de vouloir supprimer ce listing ?</p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Supprimer">
+</form>
+
+{% endblock %}
